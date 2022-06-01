@@ -11,7 +11,9 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 public class Bank {
     @Id
     private String id;
+    @Field(type = FieldType.Text)
     private String bankName;
+    @Field(type = FieldType.Text)
     private String bankCity;
 
     public Bank(String id,
