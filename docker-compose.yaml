@@ -20,12 +20,37 @@ services:
     ports:
       - 8081:8081
     environment:
-      - ME_CONFIG_MONGODB_ADMINUSERNAME=rootuser
-      - ME_CONFIG_MONGODB_ADMINPASSWORD=rootpass
-      - ME_CONFIG_MONGODB_SERVER=mongodb
-volumes:
-  data: {}
+      - "ME_CONFIG_MONGODB_ADMINUSERNAME=rootuser"
+      - "ME_CONFIG_MONGODB_ADMINPASSWORD=rootpass"
+      - "ME_CONFIG_MONGODB_SERVER=mongodb"
+
+      #Elasticsearch
+  elasticsearch:
+    image: elasticsearch:7.11.1@sha256:3a219f148b596e25c1b16bda46e1ca07db46826c0e1cde003c2d2f93f33d18e4
+    container_name: es-container
+    environment:
+      - xpack.security.enabled=false
+      - "discovery.type=single-node"
+    networks:
+      - es-net
+    ports:
+      - "9200:9200"
+
+  #Data visualization http://localhost:5601/app/home
+  kibana:
+    image: kibana:7.11.1@sha256:ea7f70a31733dbae5536281612fccbfa823e89015a8a4fd6f9544a596e2edfb6
+    container_name: kb-container
+    environment:
+      - ELASTICSEARCH_HOSTS=http://es-container:9200
+    networks:
+      - es-net
+    depends_on:
+      - elasticsearch
+    ports:
+      - "5601:5601"
 
 networks:
-  default:
-    name: mongodb_network
+  es-net:
+    driver: bridge
+volumes:
+  data: {}

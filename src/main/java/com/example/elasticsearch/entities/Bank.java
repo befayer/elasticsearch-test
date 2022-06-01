@@ -2,15 +2,15 @@ package com.example.elasticsearch.entities;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
-@Data
-@Document
+
+@Document(indexName = "bank")
 public class Bank {
     @Id
     private String id;
-    @Indexed(unique = true)
     private String bankName;
     private String bankCity;
 

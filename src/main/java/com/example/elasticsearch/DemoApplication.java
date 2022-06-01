@@ -94,20 +94,20 @@ public class DemoApplication {
 			System.out.println("Client lastname: " + retrievedAccount.getClient().getFirstname());
 
 			System.out.println("\nThis is list of client, but in other form...");
-			List<Client> clientList = new ArrayList<>(clientRepository.findAll());
+			/*List<Client> clientList = new ArrayList<>(clientRepository.findAll());
 			for (Client clients: clientList) {
 				System.out.println("Firstname: " + clients.getFirstname());
 				System.out.println("Lastname: " + clients.getFirstname());
 				System.out.println(" ");
-			}
+			}*/
 
 			//test query of spring data method
-			bankRepository.findBankByBankCity("Санкт-Петербург").ifPresentOrElse(s -> {
+			/*bankRepository.findBankByBankCity("Санкт-Петербург").ifPresentOrElse(s -> {
 				System.out.println(s + "already exists");
 			}, () -> {
 				System.out.println("Inserting bank: " + bankSaintPeterburg);
 				bankRepository.insert(bankSaintPeterburg);
-			});
+			});*/
 		};
 
 	}

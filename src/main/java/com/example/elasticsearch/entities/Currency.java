@@ -2,15 +2,17 @@ package com.example.elasticsearch.entities;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.util.UUID;
 
-@Data
-@Document
+@Document(indexName = "currency")
 public class Currency {
     @Id
     private UUID id;
+    @Field(type = FieldType.Text)
     private String nameCurrency;
 
     public Currency(UUID id, String nameCurrency) {

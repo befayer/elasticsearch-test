@@ -2,17 +2,24 @@ package com.example.elasticsearch.entities;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
-@Data
-@Document
+@Document(indexName = "account")
 public class Account {
     @Id
     private String id;
+    @Field(type = FieldType.Double)
     private double balance;
+    @Field(type = FieldType.Object)
     private Bank bank;
+    @Field(type = FieldType.Object)
     private Currency currency;
+    @Field(type = FieldType.Object)
     private Client client;
+
 
     public Account(String id, double balance, Bank bank, Currency currency, Client client) {
         this.id = id;
