@@ -11,8 +11,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @SpringBootApplication
@@ -28,6 +26,7 @@ public class DemoApplication {
 							 ClientRepository clientRepository,
 							 CurrencyRepository currencyRepository){
 		return args -> {
+
 			System.out.println(bankRepository.existsById("043601607"));
 
 			bankRepository.deleteAll();
@@ -93,13 +92,41 @@ public class DemoApplication {
 			System.out.println("Client firstname: " + retrievedAccount.getClient().getFirstname());
 			System.out.println("Client lastname: " + retrievedAccount.getClient().getFirstname());
 
-			System.out.println("\nThis is list of client, but in other form...");
-			/*List<Client> clientList = new ArrayList<>(clientRepository.findAll());
-			for (Client clients: clientList) {
-				System.out.println("Firstname: " + clients.getFirstname());
-				System.out.println("Lastname: " + clients.getFirstname());
-				System.out.println(" ");
-			}*/
+			System.out.println("\n=========================");
+			System.out.println("Update:");
+			System.out.println("List of client before update");
+
+			clientRepository.findAll().forEach(x -> {
+				System.out.println("Firstname:" +x.getFirstname());
+				System.out.println("Lastname:" +x.getLastname() + "\n");
+			});
+
+			clientTyshkun.setFirstname("NewAndrew");
+			clientRepository.save(clientTyshkun);
+
+			System.out.println("List of client after update");
+
+			clientRepository.findAll().forEach(x -> {
+				System.out.println("Firstname:" +x.getFirstname());
+				System.out.println("Lastname:" +x.getLastname() + "\n");
+			});
+
+			System.out.println("=========================");
+			System.out.println("Delete:");
+			System.out.println("List of client before delete");
+
+			clientRepository.findAll().forEach(x -> {
+				System.out.println("Firstname:" +x.getFirstname());
+				System.out.println("Lastname:" +x.getLastname() + "\n");
+			});
+
+			clientRepository.delete(clientTyshkun);
+
+			System.out.println("List of client after delete");
+			clientRepository.findAll().forEach(x -> {
+				System.out.println("Firstname:" +x.getFirstname());
+				System.out.println("Lastname:" +x.getLastname() + "\n");
+			});
 
 			//test query of spring data method
 			/*bankRepository.findBankByBankCity("Санкт-Петербург").ifPresentOrElse(s -> {

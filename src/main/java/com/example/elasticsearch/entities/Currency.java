@@ -8,7 +8,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.util.UUID;
 
-@Document(indexName = "currency")
+@Document(indexName = "index_currency")
 public class Currency {
     @Id
     private UUID id;

@@ -2,12 +2,11 @@ package com.example.elasticsearch.entities;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
-@Document(indexName = "account")
+@Document(indexName = "index_account")
 public class Account {
     @Id
     private String id;
